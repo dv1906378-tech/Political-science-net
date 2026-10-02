@@ -7512,3 +7512,360 @@ document.getElementById("code")
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hii Seenu AI</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    background:#001006;
+    color:#00ff55;
+    font-family:Courier New,monospace;
+}
+
+.box{
+    width:94%;
+    max-width:650px;
+    margin:25px auto;
+    border:1px solid #00ff55;
+    background:#00150a;
+    box-shadow:0 0 25px #00ff5533;
+}
+
+header{
+    padding:22px;
+    border-bottom:1px solid #00ff5533;
+}
+
+h1{
+    margin:0;
+    font-size:25px;
+    text-shadow:0 0 10px #00ff55;
+}
+
+.status{
+    margin-bottom:12px;
+    font-size:11px;
+    letter-spacing:3px;
+}
+
+main{
+    padding:25px 20px;
+}
+
+#login{
+    display:block;
+}
+
+label{
+    display:block;
+    margin-bottom:12px;
+    font-size:13px;
+    letter-spacing:3px;
+}
+
+#code{
+    width:100%;
+    padding:17px;
+    background:#001d0a;
+    border:1px solid #00ff5555;
+    color:#00ff55;
+    outline:none;
+    font-family:inherit;
+    font-size:18px;
+}
+
+#assistant{
+    display:none;
+}
+
+.title{
+    padding:15px;
+    border:1px solid #00ff5533;
+    margin-bottom:15px;
+}
+
+#chat{
+    height:360px;
+    overflow-y:auto;
+    border:1px solid #00ff5533;
+    padding:15px;
+    background:#000d05;
+}
+
+.message{
+    margin-bottom:14px;
+    padding:11px;
+    line-height:1.6;
+    border-left:2px solid #00ff55;
+}
+
+.user{
+    color:white;
+    border-left-color:white;
+}
+
+.chatbar{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+#msg{
+    flex:1;
+    padding:15px;
+    background:#001d0a;
+    border:1px solid #00ff5555;
+    color:#00ff55;
+    outline:none;
+    font-family:inherit;
+}
+
+.send{
+    width:80px;
+    background:transparent;
+    color:#00ff55;
+    border:1px solid #00ff55;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<header>
+    <div class="status">● SYSTEM ONLINE</div>
+    <h1>🤖 HII SEENU AI</h1>
+</header>
+
+<main>
+
+<!-- CODE SCREEN -->
+
+<div id="login">
+
+    <label>ENTER CODE</label>
+
+    <input
+        id="code"
+        type="text"
+        placeholder="Type hii seenu..."
+        autocomplete="off"
+    >
+
+</div>
+
+
+<!-- AI ASSISTANT -->
+
+<div id="assistant">
+
+    <div class="title">
+        🤖 SEENU AI ASSISTANT — ONLINE
+    </div>
+
+    <div id="chat">
+
+        <div class="message">
+            <b>SEENU AI:</b><br>
+            नमस्ते! 😊 मैं Seenu AI Assistant हूँ।
+            आप मुझसे बात कर सकते हैं।
+        </div>
+
+    </div>
+
+    <div class="chatbar">
+
+        <input
+            id="msg"
+            type="text"
+            placeholder="अपना संदेश लिखें..."
+        >
+
+        <button class="send" onclick="sendMessage()">
+            SEND
+        </button>
+
+    </div>
+
+</div>
+
+</main>
+
+</div>
+
+
+<script>
+
+const SECRET_CODE = "hii seenu";
+
+const codeBox =
+    document.getElementById("code");
+
+
+/* जैसे ही hii seenu लिखा जाए */
+
+codeBox.addEventListener("input", function(){
+
+    let text =
+        codeBox.value
+        .trim()
+        .toLowerCase();
+
+    if(text === SECRET_CODE){
+
+        document.getElementById("login")
+            .style.display = "none";
+
+        document.getElementById("assistant")
+            .style.display = "block";
+
+        document.getElementById("msg")
+            .focus();
+
+    }
+
+});
+
+
+/* Chat */
+
+function sendMessage(){
+
+    const input =
+        document.getElementById("msg");
+
+    const text =
+        input.value.trim();
+
+    if(text === "") return;
+
+    addMessage("YOU",text,"user");
+
+    input.value = "";
+
+    setTimeout(function(){
+
+        let answer =
+            getAnswer(text);
+
+        addMessage(
+            "SEENU AI",
+            answer,
+            ""
+        );
+
+    },500);
+
+}
+
+
+/* Enter से भी message भेज सकते हैं */
+
+document.getElementById("msg")
+.addEventListener("keydown",function(e){
+
+    if(e.key === "Enter"){
+        sendMessage();
+    }
+
+});
+
+
+function addMessage(name,text,type){
+
+    const chat =
+        document.getElementById("chat");
+
+    const div =
+        document.createElement("div");
+
+    div.className =
+        "message " + type;
+
+    div.innerHTML =
+        "<b>" + name + ":</b><br>" +
+        escapeHTML(text);
+
+    chat.appendChild(div);
+
+    chat.scrollTop =
+        chat.scrollHeight;
+
+}
+
+
+/* Demo responses */
+
+function getAnswer(text){
+
+    let t =
+        text.toLowerCase();
+
+    if(t.includes("hello") ||
+       t.includes("hi") ||
+       t.includes("namaste")){
+
+        return "नमस्ते 😊 बताइए, मैं आपकी क्या मदद करूँ?";
+
+    }
+
+    if(t.includes("kaise ho") ||
+       t.includes("कैसे हो")){
+
+        return "मैं बिल्कुल ठीक हूँ 😊 आप बताइए।";
+
+    }
+
+    if(t.includes("naam") ||
+       t.includes("नाम")){
+
+        return "मेरा नाम Seenu AI Assistant है।";
+
+    }
+
+    if(t.includes("python") ||
+       t.includes("पाइथन")){
+
+        return "मैं आपको Python step-by-step सीखने में मदद कर सकता हूँ।";
+
+    }
+
+    if(t.includes("github")){
+
+        return "GitHub पर हम आपकी website को live कर सकते हैं।";
+
+    }
+
+    return "मैंने आपका संदेश समझा: " + text +
+           "\n\nअभी मैं demo mode में हूँ।";
+
+}
+
+
+function escapeHTML(text){
+
+    return text
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+</script>
+
+</body>
+</html>
