@@ -7209,5 +7209,163 @@ function sharePage(){
     }
 }
 
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Details Search</title>
+
+<style>
+body{
+    font-family:Arial,"Noto Sans Devanagari",sans-serif;
+    background:#eef2ff;
+    margin:0;
+    padding:25px;
+}
+
+.box{
+    max-width:500px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 5px 20px #999;
+}
+
+h2{
+    text-align:center;
+    color:#172554;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    font-size:17px;
+    border:1px solid #aaa;
+    border-radius:10px;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    margin-top:12px;
+    padding:14px;
+    background:#2563eb;
+    color:white;
+    border:0;
+    border-radius:10px;
+    font-size:17px;
+}
+
+#result{
+    margin-top:20px;
+}
+
+.card{
+    background:#f8fafc;
+    padding:18px;
+    border-radius:12px;
+    line-height:1.8;
+}
+
+.error{
+    color:red;
+    text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>📱 Details Search</h2>
+
+<input
+    type="text"
+    id="number"
+    placeholder="Mobile number डालें"
+    maxlength="10"
+>
+
+<button onclick="searchDetails()">
+    🔍 Details देखें
+</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+const records = {
+
+    "9369501458": {
+        name: "Amit Kumar",
+        father: "Lalai Raam",
+        village: "Dhaurahara",
+        mobile: "9369501458",
+        mobile2: "7571033156",
+        address: "Dhaurahara, Aspur Devsara, Patti, Pratapgarh"
+    },
+
+    "7571033156": {
+        name: "Amit Kumar",
+        father: "Lalai Raam",
+        village: "Dhaurahara",
+        mobile: "9369501458",
+        mobile2: "7571033156",
+        address: "Dhaurahara, Aspur Devsara, Patti, Pratapgarh"
+    }
+
+};
+
+function searchDetails(){
+
+    let number =
+        document.getElementById("number").value.trim();
+
+    let result =
+        document.getElementById("result");
+
+    if(records[number]){
+
+        let d = records[number];
+
+        result.innerHTML = `
+        <div class="card">
+
+        <h3>👤 व्यक्ति की जानकारी</h3>
+
+        <b>नाम:</b> ${d.name}<br>
+
+        <b>पिता का नाम:</b> ${d.father}<br>
+
+        <b>गाँव:</b> ${d.village}<br>
+
+        <b>मोबाइल नंबर:</b> ${d.mobile}<br>
+
+        <b>दूसरा मोबाइल:</b> ${d.mobile2}<br>
+
+        <b>पता:</b> ${d.address}
+
+        </div>
+        `;
+
+    }else{
+
+        result.innerHTML =
+        `<p class="error">
+        ❌ इस नंबर का कोई रिकॉर्ड नहीं मिला।
+        </p>`;
+
+    }
+}
+
+</script>
+
+</body>
+</html>
 
