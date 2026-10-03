@@ -6703,4 +6703,302 @@ Act East Policy ने भारत के पूर्वी और दक्�
 
 </footer>
 
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Private Code Database</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#001006;
+    color:#00ff55;
+    font-family:Courier New,monospace;
+    min-height:100vh;
+}
+
+.container{
+    width:92%;
+    max-width:650px;
+    margin:25px auto;
+    border:1px solid #00ff55;
+    box-shadow:0 0 25px #00ff5533;
+    background:#00150a;
+}
+
+header{
+    padding:25px 20px;
+    border-bottom:1px solid #00ff5533;
+}
+
+.status{
+    font-size:11px;
+    letter-spacing:3px;
+    margin-bottom:20px;
+}
+
+h1{
+    margin:0;
+    font-size:26px;
+    text-shadow:0 0 10px #00ff55;
+}
+
+.subtitle{
+    margin-top:8px;
+    font-size:12px;
+    letter-spacing:3px;
+}
+
+main{
+    padding:30px 22px;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    letter-spacing:3px;
+    margin-bottom:12px;
+}
+
+input{
+    width:100%;
+    padding:17px;
+    background:#001d0a;
+    border:1px solid #00ff5555;
+    color:#00ff55;
+    outline:none;
+    font-family:inherit;
+    font-size:18px;
+}
+
+input::placeholder{
+    color:#006622;
+}
+
+button{
+    width:100%;
+    margin-top:18px;
+    padding:17px;
+    background:transparent;
+    color:#00ff55;
+    border:1px solid #00ff55;
+    font-family:inherit;
+    font-size:15px;
+    font-weight:bold;
+    letter-spacing:3px;
+}
+
+button:active{
+    background:#00ff5522;
+}
+
+#message{
+    margin-top:20px;
+    font-size:12px;
+}
+
+.card{
+    display:none;
+    margin-top:22px;
+    padding:20px;
+    border:1px solid #00ff5555;
+    background:#001d0a;
+}
+
+.card h2{
+    margin-top:0;
+    font-size:21px;
+}
+
+.detail{
+    padding:10px 0;
+    border-bottom:1px solid #00ff5522;
+    line-height:1.5;
+}
+
+.detail b{
+    color:#00ffaa;
+}
+
+footer{
+    padding:18px 22px;
+    border-top:1px solid #00ff5522;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+@media(max-width:500px){
+    h1{
+        font-size:22px;
+    }
+
+    main{
+        padding:25px 17px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+    <div class="status">● SYSTEM ONLINE</div>
+    <h1>PRIVATE CODE DATABASE</h1>
+    <div class="subtitle">AUTHORIZED RECORD LOOKUP</div>
+</header>
+
+<main>
+
+<label>ENTER CODE</label>
+
+<input
+    id="code"
+    type="text"
+    inputmode="numeric"
+    placeholder="Enter code..."
+>
+
+<button onclick="searchCode()">
+    [ SEARCH RECORD ]
+</button>
+
+<div id="message"></div>
+
+<div class="card" id="record">
+
+    <h2 id="name"></h2>
+
+    <div class="detail">
+        <b>CODE:</b>
+        <span id="rCode"></span>
+    </div>
+
+    <div class="detail">
+        <b>FATHER:</b>
+        <span id="father"></span>
+    </div>
+
+    <div class="detail">
+        <b>VILLAGE:</b>
+        <span id="village"></span>
+    </div>
+
+    <div class="detail">
+        <b>ADDRESS:</b>
+        <span id="address"></span>
+    </div>
+
+</div>
+
+</main>
+
+<footer>
+    PRIVATE / DEMO DATABASE — NO EXTERNAL SEARCH
+</footer>
+
+</div>
+
+
+<script>
+
+/*
+   YOUR RECORDS
+   Code डालने पर संबंधित record दिखाई देगा.
+*/
+
+const database = {
+
+    "7081895798": {
+        name: "Dheeraj Verma",
+        father: "Lakhan Verma",
+        village: "Dhaurahara",
+        address: "Dhaurahara, Aaspur Devsara, Patti, Pratapgarh"
+    },
+
+    "7081984025": {
+        name: "Neeraj Verma",
+        father: "Ram Lakhan Verma",
+        village: "Dhaurahara",
+        address: "Dhaurahara, Aaspur Devsara, Patti, Pratapgarh"
+    }
+
+};
+
+
+function searchCode(){
+
+    const code =
+        document.getElementById("code").value.trim();
+
+    const message =
+        document.getElementById("message");
+
+    const record =
+        document.getElementById("record");
+
+    if(code === ""){
+        record.style.display = "none";
+        message.innerText = "⚠ ENTER A CODE";
+        return;
+    }
+
+    if(database[code]){
+
+        const data = database[code];
+
+        document.getElementById("name")
+            .innerText = data.name;
+
+        document.getElementById("rCode")
+            .innerText = code;
+
+        document.getElementById("father")
+            .innerText = data.father;
+
+        document.getElementById("village")
+            .innerText = data.village;
+
+        document.getElementById("address")
+            .innerText = data.address;
+
+        message.innerText =
+            "✓ RECORD FOUND";
+
+        record.style.display = "block";
+
+    }else{
+
+        record.style.display = "none";
+
+        message.innerText =
+            "✕ CODE NOT FOUND";
+
+    }
+
+}
+
+
+/* Enter दबाने पर भी search होगा */
+
+document.getElementById("code")
+.addEventListener("keydown", function(event){
+
+    if(event.key === "Enter"){
+        searchCode();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
