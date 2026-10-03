@@ -7368,4 +7368,134 @@ function searchDetails(){
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Details</title>
 
+<style>
+body{
+    margin:0;
+    padding:20px;
+    font-family:Arial,sans-serif;
+    background:#e8eef7;
+}
+
+.container{
+    max-width:500px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+}
+
+h1{
+    text-align:center;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    font-size:18px;
+    box-sizing:border-box;
+    border:2px solid #ccc;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    margin-top:12px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+}
+
+#result{
+    margin-top:20px;
+}
+
+.card{
+    background:#f1f5f9;
+    padding:18px;
+    border-radius:12px;
+    line-height:2;
+}
+
+.error{
+    color:red;
+    text-align:center;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🔎 Details Search</h1>
+
+<input
+    id="mobile"
+    type="tel"
+    inputmode="numeric"
+    placeholder="मोबाइल नंबर डालें"
+>
+
+<button onclick="searchNumber()">
+    Details देखें
+</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function searchNumber(){
+
+    var number = document.getElementById("mobile").value.trim();
+    var result = document.getElementById("result");
+
+    if(number === "9369501458" || number === "7571033156"){
+
+        result.innerHTML = `
+        <div class="card">
+            <h2>👤 Details</h2>
+
+            <b>नाम:</b> Amit Kumar<br>
+
+            <b>पिता का नाम:</b> Lalai Raam<br>
+
+            <b>गाँव:</b> Dhaurahara<br>
+
+            <b>मोबाइल नंबर:</b> 9369501458<br>
+
+            <b>दूसरा नंबर:</b> 7571033156<br>
+
+            <b>पता:</b>
+            Dhaurahara, Aspur Devsara,
+            Patti, Pratapgarh
+        </div>
+        `;
+
+    }else{
+
+        result.innerHTML = `
+        <div class="error">
+            ❌ इस नंबर का रिकॉर्ड नहीं मिला।
+        </div>
+        `;
+    }
+}
+
+</script>
+
+</body>
+</html>
